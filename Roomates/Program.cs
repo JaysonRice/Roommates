@@ -82,13 +82,14 @@ namespace Roommates
 
             Console.WriteLine($"{singleRoommate.Id} {singleRoommate.FirstName} {singleRoommate.RentPortion} {singleRoommate.MoveInDate} {singleRoommate.Room}");
 
+            Console.WriteLine($"Getting All Roommates with room Id of 1:");
+            Console.WriteLine();
             List<Roommate> someRoommates = roommateRepo.GetAllWithRoom(1);
 
             foreach (Roommate roommate in someRoommates)
             {
-                Console.WriteLine($"{roommate.FirstName} {roommate.Room.Name}");
+                Console.WriteLine($"{roommate.FirstName} {roommate.LastName} {roommate.Room.Name}");
             }
-
            
         }
     }
