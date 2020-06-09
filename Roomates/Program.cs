@@ -16,6 +16,7 @@ namespace Roommates
         static void Main(string[] args)
         {
             RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+            RoommateRepository roommateRepo = new RoommateRepository(CONNECTION_STRING);
 
 
             ///  Show the room with Id of 1.
@@ -49,6 +50,10 @@ namespace Roommates
 
             Console.WriteLine("-------------------------------");
 
+            Console.WriteLine($"Deleting the new Room with id {bathroom.Id}");
+            roomRepo.Delete(bathroom.Id);
+
+
             Console.WriteLine("Getting All Rooms:");
             Console.WriteLine();
 
@@ -59,6 +64,32 @@ namespace Roommates
                 Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
             }
 
+
+            Console.WriteLine("Getting All Roommates:");
+            Console.WriteLine();
+
+            List<Roommate> allRoommates = roommateRepo.GetAll();
+
+            foreach (Roommate roommate in allRoommates)
+            {
+                Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion} {roommate.MoveInDate} {roommate.Room}");
+            }
+
+            Console.WriteLine($"Getting All Roommates with id 1:");
+            Console.WriteLine();
+
+            Roommate singleRoommate = roommateRepo.GetById(1);
+
+            Console.WriteLine($"{singleRoommate.Id} {singleRoommate.FirstName} {singleRoommate.RentPortion} {singleRoommate.MoveInDate} {singleRoommate.Room}");
+
+            List<Roommate> someRoommates = roommateRepo.GetAllWithRoom(1);
+
+            foreach (Roommate roommate in someRoommates)
+            {
+                Console.WriteLine($"{roommate.FirstName} {roommate.Room.Name}");
+            }
+
+           
         }
     }
 }
